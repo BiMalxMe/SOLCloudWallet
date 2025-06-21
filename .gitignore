@@ -1,0 +1,108 @@
+# General ignores for various OS, IDEs, and common files
+.DS_Store
+.env
+.env.*
+.vscode/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# OS-specific
+.DS_Store
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.bak
+*.swo
+*~.nib
+*.sublime-project
+*.sublime-workspace
+
+# Build artifacts and compiled code
+build/
+dist/
+out/
+tmp/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Test and coverage
+coverage/
+.nyc_output/
+
+# Frontend specific (assuming a common JS framework like React, Vue, Angular)
+## Node.js specific
+node_modules/
+build/
+dist/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+# misc
+.web.js
+.gitattributes
+
+# Backend specific (assuming Node.js or Python)
+## Node.js specific
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Dependency directories
+node_modules/
+
+# Build artifacts
+dist/
+build/
+tmp/
+
+# Environment variables
+.env
+.env.development
+.env.production
+.env.test
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Python specific (if your backend is Python)
+__pycache__/
+*.pyc
+*.pyd
+*.so
+venv/
+.venv/
+env/
+.env/
+pip-log.txt
+pip-delete-this-arg.txt
+.python-version
+celerybeat-schedule
+.pytest_cache/
+htmlcov/
+.tox/
