@@ -1,35 +1,84 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import { Header } from './components/Header'
+import { SignIn } from './components/Signin'
+import { SignUp } from './components/Signup'
+import { Dashboardd } from './components/Dashboard'
+
+// Dummy Dashboard component for demonstration
+const Dashboard = () => (
+  <div className="text-white text-xl mt-10">
+    <Dashboardd />
+    <button
+      className="mt-4 bg-red-600 text-white rounded px-4 py-2 hover:bg-red-700"
+      onClick={() => {
+        localStorage.removeItem("token");
+        window.location.reload();
+      }}
+    >
+      Logout
+    </button>
+  </div>
+);
 
 function App() {
-  const [count, setCount] = useState(0)
+  // type can be "signin", "signup", or "dashboard"
+  const [type, setType] = useState<"signin" | "signup" | "dashboard">(() => {
+    return localStorage.getItem("token") ? "dashboard" : "signin";
+  });
+
+  // Listen for token changes (e.g., after login/signup)
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setType("dashboard");
+    }
+  }, []);
+
+  // Helper to switch to dashboard after successful login/signup
+  const handleAuthSuccess = () => {
+    setType("dashboard");
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex flex-col items-center min-h-screen">
+      <div className="w-full flex justify-center mt-33">
+        <div className="scale-150">
+          <Header />
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <div className="border border-white rounded-4xl p-8 mt-8 flex flex-col items-center min-w-[350px]">
+        {type === "dashboard" ? (
+          <Dashboard />
+        ) : type === "signin" ? (
+          <>
+            <SignIn />
+            <div>
+              Didn't sign up?{" "}
+              <a
+                className="text-blue-400 cursor-pointer underline"
+                onClick={() => setType("signup")}
+              >
+                SignUp
+              </a>
+            </div>
+          </>
+        ) : (
+          <>
+            <SignUp onAuthSuccess={handleAuthSuccess} />
+            <div>
+              Already signed up?{" "}
+              <a
+                className="text-blue-400 cursor-pointer underline"
+                onClick={() => setType("signin")}
+              >
+                SignIn
+              </a>
+            </div>
+          </>
+        )}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </div>
+  );
 }
 
 export default App
