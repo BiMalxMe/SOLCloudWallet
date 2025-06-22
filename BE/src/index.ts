@@ -2,7 +2,9 @@ import express, { Request, Response } from "express"
 import userModel from "./db";
 import jwt  from "jsonwebtoken";
 const app = express()
-
+import cors from "cors"
+app.use(cors());
+app.use(express.json())
 app.use(express.json())
 
 import { date, z } from "zod";
