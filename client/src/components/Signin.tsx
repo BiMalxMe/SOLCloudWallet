@@ -23,6 +23,8 @@ export const SignIn = () =>  {
       }
       localStorage.setItem("token",data.token);
       setResponseMsg(data.msg || "Signin successful!");
+      window.location.reload();
+
      
     } catch (err: any) {
       setResponseMsg("An error occurred during signin.");

@@ -1,11 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-interface SignUpProps {
-  onAuthSuccess?: () => void;
-}
-
-export const SignUp = ({ onAuthSuccess }: SignUpProps) =>  {
+export const SignUp = () =>  {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -28,12 +24,12 @@ export const SignUp = ({ onAuthSuccess }: SignUpProps) =>  {
         });
         setResponseMsg(signinRes.data.msg || "Signed in after signup!");
       if (signinRes.data.token) {
-        localStorage.setItem("token", signinRes.data.token);
-        
-        // Call the auth success callback to navigate to dashboard
-        if (onAuthSuccess) {
-          onAuthSuccess();
-        }
+        // Store the token in a state variable
+        // You may want to lift this state up for app-wide usage, but for now, store locally
+        // Add a new state for token if not already present
+        // @ts-ignore
+        localStorage.setItem("token",signinRes.data.token);
+
       }
       } catch (signinErr: any) {
         if (signinErr.response && signinErr.response.data && signinErr.response.data.msg) {

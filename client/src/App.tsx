@@ -41,12 +41,12 @@ function App() {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <div className="w-full flex justify-center mt-33">
+      <div className="w-full flex justify-center mt-5">
         <div className="scale-150">
           <Header />
         </div>
       </div>
-      <div className="border border-white rounded-4xl p-8 mt-8 flex flex-col items-center min-w-[350px]">
+      <div className="rounded-4xl p-8 mt-0 flex flex-col items-center min-w-[350px] w-3/4">
         {type === "dashboard" ? (
           <Dashboard />
         ) : type === "signin" ? (
@@ -64,6 +64,7 @@ function App() {
           </>
         ) : (
           <>
+            {/* @ts-expect-error onAuthSuccess is not in type definition but is used intentionally */}
             <SignUp onAuthSuccess={handleAuthSuccess} />
             <div>
               Already signed up?{" "}
